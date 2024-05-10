@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirstService } from './services/s1/first.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'e-learning';
+
+
+
 }
