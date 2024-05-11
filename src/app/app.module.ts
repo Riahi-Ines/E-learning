@@ -4,8 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HttpTokenInterceptor } from './modules/app-common/services/interceptors/http-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS, // Provide the HTTP_INTERCEPTORS token
+      useClass: HttpTokenInterceptor, // Use the HttpTokenInterceptor class that we create
+      multi:true // Allow multiple interceptors with the default angular interceptors
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
