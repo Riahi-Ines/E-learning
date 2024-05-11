@@ -32,14 +32,13 @@ export class AppComponent {
       }
       
     });
-    this.result=this.myservice.sum(Math.random(),5);
    }
 
    async asyncCall(){
     //promise
    // const res = this.firstRestService.findAllStudents().toPromise();
     const res = await lastValueFrom (this.firstRestService.findAllStudents());//some as toPromise
-    this.result=this.myservice.sum(Math.random(),5);
+
    }
 
 }
