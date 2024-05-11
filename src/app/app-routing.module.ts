@@ -17,12 +17,12 @@ const routes: Routes = [
   {
     path:'student',
     loadChildren: () => import('./modules/student/student.module').then(m=>m.StudentModule),
-    canActivate: [authGuard, studentGuard]
+   // canActivate: [authGuard, studentGuard]
   },
   {
     path:'teacher',
     loadChildren:()=> import('./modules/teacher/teacher.module').then(m=>m.TeacherModule),
-    canActivate: [authGuard, studentGuard]
+   // canActivate: [authGuard, studentGuard]
   }
 ];
 
