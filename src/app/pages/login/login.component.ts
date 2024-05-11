@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthRequest } from 'src/app/models/auth-request';
 import { AuthResponse } from 'src/app/models/auth-response';
+import { TokenService } from 'src/app/modules/app-common/services/token/token.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginComponent {
   errorMsg: Array<string> = [];
   authRequest:AuthRequest={email:'',password:''}
-  constructor(private router:Router,private authService:AuthService){
+  constructor(private router:Router,private authService:AuthService,private tokenService:TokenService){
 
    }
   register() {
@@ -24,7 +25,9 @@ export class LoginComponent {
     this.authService.login(this.authRequest)
       .subscribe({
         next: (res:AuthResponse) => {
-          this.router.navigate(['student']);
+          //localStorage.setItem('token',res.token as string)//cast
+          this.tokenService.token = res.token as string;
+          this.redirectConnectedUser();
         },
         error: (err) => {
           if (err.error.validationErrors) {
@@ -35,4 +38,13 @@ export class LoginComponent {
         }
       });
   }
+
+  private redirectConnectedUser() {
+    if (this.tokenService.isStudent()) {
+      this.router.navigate(['student']);
+    } else if (this.tokenService.isTeacher()) {
+      this.router.navigate(['teacher']);
+    }
+  }
+
 }

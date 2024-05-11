@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { SubjectPageResponse } from 'src/app/models/subject-page-response';
 import { SubjectRequest } from 'src/app/models/subject-request'
 import { SubjectResponse } from 'src/app/models/subject-response';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  baseUrl : string = 'http//localhost:8080';
+  baseUrl = environment.app.baseUrl;
 
   constructor(
     private http: HttpClient

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { AuthRequest } from 'src/app/models/auth-request';
 import { AuthResponse } from 'src/app/models/auth-response';
 import { RegisterRequest } from 'src/app/models/register-request';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  baseUrl : string = 'http//localhost:8080';
+  baseUrl = environment.app.baseUrl;
   constructor(
     private http: HttpClient
   ) { }
