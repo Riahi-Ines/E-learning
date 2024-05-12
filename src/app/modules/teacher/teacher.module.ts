@@ -7,13 +7,17 @@ import { AppCommonModule } from '../app-common/app-common.module';
 import { SubjectListComponent } from './pages/subject-list/subject-list.component';
 import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { FormsModule } from '@angular/forms';
+import { ListComponent } from './pages/demo-page/components/list/list.component';
+import { FormComponent } from './pages/demo-page/components/form/form.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     ManageSubjectComponent,
     SubjectListComponent,
-    DemoPageComponent
+    DemoPageComponent,
+    ListComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
