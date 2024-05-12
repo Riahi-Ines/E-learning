@@ -1,44 +1,31 @@
-import { Component } from '@angular/core';
-import { FirstService } from './services/s1/first.service';
-import { FirstRestService } from './services/rest/first-rest.service';
-import { StudentResponse } from './services/rest/student-response';
-import { lastValueFrom } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { AppInitializerService } from './modules/app-common/services/app-init/app-initilizer.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'e-learning';
-  result: number=0;
-  constructor(private myservice:FirstService,private firstRestService:FirstRestService){
 
+  constructor(private translate: TranslateService,private appInitializerService:AppInitializerService){
+    //this.translate.setDefaultLang('ar');
   }
-
-   calculate() {
-      this.firstRestService.findAllStudents().subscribe({
-      next: (res:any)=>{
-        console.log('Rest call result recieved');
-        console.log(res);
-      },
-      error: (err:any)=>{
-        console.log('Rest call error');
-        console.log(err);
-
-      },
-      complete:()=>{
-        console.log('Rest call done');
+  ngOnInit(): void {
+    this.appInitializerService.initializeApp().then(() => {
+      const defaultLang = this.translate.getDefaultLang();
+      if (defaultLang === 'ar') {
+          this.translate.setDefaultLang('ar');
+          document.dir = 'rtl'; // RTL direction change right to left
+      } else {
+          document.dir = 'ltr';// left to right
       }
-      
     });
-   }
+}
+ 
 
-   async asyncCall(){
-    //promise
-   // const res = this.firstRestService.findAllStudents().toPromise();
-    const res = await lastValueFrom (this.firstRestService.findAllStudents());//some as toPromise
-
-   }
+   
 
 }

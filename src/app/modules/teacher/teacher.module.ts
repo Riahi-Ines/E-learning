@@ -9,6 +9,7 @@ import { DemoPageComponent } from './pages/demo-page/demo-page.component';
 import { FormsModule } from '@angular/forms';
 import { ListComponent } from './pages/demo-page/components/list/list.component';
 import { FormComponent } from './pages/demo-page/components/form/form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormComponent } from './pages/demo-page/components/form/form.component'
     CommonModule,
     TeacherRoutingModule,
     AppCommonModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class TeacherModule { }
